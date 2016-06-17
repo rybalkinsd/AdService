@@ -1,0 +1,44 @@
+@startuml
+skinparam dpi 300
+skinparam monochrome true
+
+title Ad serving component
+
+start
+
+:Parse JSON request, extract ""h"", ""w"" and ""adPlaceId"";
+
+:Find ""App"" for given ""adPlaceId"";
+
+if (""App"" is banned?) then (yes)
+  :Generate empty JSON response;
+  stop
+else (no)
+  partition "Size selection" {
+  if (""App"" has minimum allowed ad size?) then (yes)
+    if (Is real ""h"", ""w"" smaller than minimum allowed?) then (yes)
+      :Generate empty JSON response;
+      stop
+    else (no)
+    endif
+  else (no)
+  endif
+  if (""App"" has maximum allowed ad size?) then (yes)
+    if (Is real ""h"", ""w"" bigger than maximum allowed?) then (yes)
+      :Set ""h"", ""w"" to maximum allowed;
+    else (no)
+    endif
+  else (no)
+  endif
+  }
+endif
+
+:Find ""type"" of ""AdPlace"";
+
+:Request for URL of advertisement of specified ""type"" and ""h"", ""w"" size;
+
+:Generate JSON response with advertisement;
+
+stop
+
+@enduml
