@@ -1,0 +1,12 @@
+syntax: glob
+target/*
+.idea/*
+*.iml
+*/*.iml
+./*.iml
+
+
+syntax: regexp
+maven
+logs
+.*.iml

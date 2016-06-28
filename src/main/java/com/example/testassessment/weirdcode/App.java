@@ -1,62 +1,24 @@
 package com.example.testassessment.weirdcode;
 
+import lombok.Data;
+
+@Data
 public class App {
-
     private String id;
-
     private boolean banned;
-
     private Integer minH;
     private Integer minW;
-
     private Integer maxH;
     private Integer maxW;
 
-    public String getId() {
-        return id;
+    public boolean isSmallerThanMinimum(int h, int w) {
+        return minH != null && minW != null
+                && minH > h && minW > w;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public boolean isBiggerThanMaximum(int h, int w) {
+        return maxH != null && maxW != null
+                && maxH < h && maxW < w;
     }
 
-    public boolean getBanned() {
-        return banned;
-    }
-
-    public void setBanned(boolean banned) {
-        this.banned = banned;
-    }
-
-    public Integer getMinH() {
-        return minH;
-    }
-
-    public void setMinH(Integer minH) {
-        this.minH = minH;
-    }
-
-    public Integer getMinW() {
-        return minW;
-    }
-
-    public void setMinW(Integer minW) {
-        this.minW = minW;
-    }
-
-    public Integer getMaxH() {
-        return maxH;
-    }
-
-    public void setMaxH(Integer maxH) {
-        this.maxH = maxH;
-    }
-
-    public Integer getMaxW() {
-        return maxW;
-    }
-
-    public void setMaxW(Integer maxW) {
-        this.maxW = maxW;
-    }
 }
