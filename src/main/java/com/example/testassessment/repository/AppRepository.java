@@ -1,4 +1,4 @@
-package com.example.testassessment.data;
+package com.example.testassessment.repository;
 
 import java.util.Optional;
 

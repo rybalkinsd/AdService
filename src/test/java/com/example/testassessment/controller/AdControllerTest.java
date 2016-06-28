@@ -1,7 +1,7 @@
 package com.example.testassessment.controller;
 
-import com.example.testassessment.data.AdPlace;
-import com.example.testassessment.data.App;
+import com.example.testassessment.repository.AdPlace;
+import com.example.testassessment.repository.App;
 import com.example.testassessment.util.AdSize;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,9 +12,10 @@ import static org.junit.Assert.assertEquals;
 
 
 public class AdControllerTest {
-    private final static String AD_PLACE_ID = "1f855d85-6b3b-4113-af6b-c87b1b39e185";
-    private final static String APP_ID = "2e95de7a-12c3-421f-b6dd-fe19623a3763";
-    private final static String AD_PLACE_TYPE = "animation";
+    private static final String AD_PLACE_ID = "1f855d85-6b3b-4113-af6b-c87b1b39e185";
+    private static final String APP_ID = "2e95de7a-12c3-421f-b6dd-fe19623a3763";
+    private static final String AD_PLACE_TYPE_ANIM = "animation";
+
 
     private AdController adController;
 
@@ -23,12 +24,12 @@ public class AdControllerTest {
         AdPlace adPlace = new AdPlace();
         adPlace.setId(AD_PLACE_ID);
         adPlace.setAppId(APP_ID);
-        adPlace.setType(AD_PLACE_TYPE);
+        adPlace.setType(AD_PLACE_TYPE_ANIM);
 
         App app = new App();
         app.setId(APP_ID);
-        app.setAdMaxSize(new AdSize(200, 200));
         app.setAdMinSize(new AdSize(100, 100));
+        app.setAdMaxSize(new AdSize(200, 200));
 
         AdProcessor adProcessor = new AdProcessor();
         adProcessor.setResourceService(new AdResourceService());
@@ -59,4 +60,5 @@ public class AdControllerTest {
         String response = adController.serveAd(jsonRequest);
         assertEquals("{}", response);
     }
+
 }

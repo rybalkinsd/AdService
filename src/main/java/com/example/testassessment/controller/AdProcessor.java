@@ -1,9 +1,9 @@
 package com.example.testassessment.controller;
 
-import com.example.testassessment.data.AdPlace;
-import com.example.testassessment.data.AdPlaceRepository;
-import com.example.testassessment.data.App;
-import com.example.testassessment.data.AppRepository;
+import com.example.testassessment.repository.AdPlace;
+import com.example.testassessment.repository.AdPlaceRepository;
+import com.example.testassessment.repository.App;
+import com.example.testassessment.repository.AppRepository;
 import com.example.testassessment.util.AdSize;
 import lombok.Setter;
 import org.slf4j.Logger;
@@ -13,7 +13,7 @@ import java.net.URL;
 import java.util.Optional;
 
 
-class AdProcessor {
+public class AdProcessor {
     private static final Logger log = LoggerFactory.getLogger(AdProcessor.class);
 
     @Setter
@@ -24,7 +24,7 @@ class AdProcessor {
     private AdResourceService resourceService;
 
 
-    AdResponse process(final AdRequest request) {
+    public AdResponse process(final AdRequest request) {
         Optional<AdPlace> oAdPlace = adPlaceRepository.findById(request.getAdPlaceId());
         if (!oAdPlace.isPresent()) {
             log.info("No {} in adPlaceRepository.", request.getAdPlaceId());
@@ -49,7 +49,7 @@ class AdProcessor {
             return AdResponse.EmptyAdResponse;
         }
 
-        if (app.getAdMaxSize().isLessThan(requestedAdSize)) {
+        if (app.getAdMaxSize() != null && app.getAdMaxSize().isLessThan(requestedAdSize)) {
             requestedAdSize = app.getAdMaxSize();
         }
 
