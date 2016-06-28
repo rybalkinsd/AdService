@@ -12,6 +12,8 @@ public class AdResourceServiceTest {
     public void test() throws Exception {
         Assert.assertTrue(adResourceService.getResourceLocator("image", new AdSize(100, 100)).get().getPath().contains("png"));
         Assert.assertTrue(adResourceService.getResourceLocator("animation", new AdSize(100, 100)).get().getPath().contains("gif"));
-        Assert.assertTrue(adResourceService.getResourceLocator("video", new AdSize(100, 100)).get().getPath().contains("mp4"));
+        Assert.assertFalse(adResourceService.getResourceLocator("video", new AdSize(100, 100)).isPresent());
+        Assert.assertTrue(adResourceService.getResourceLocator("video", new AdSize(330, 380)).get().getPath().contains("mp4"));
+
     }
 }

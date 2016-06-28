@@ -15,7 +15,7 @@ public class AdResourceService {
      *
      * @param adType type of advertisement
      * @param size size of advertisement
-     * @return URL of file which should be displayed on client side
+     * @return Optional<URL> of file which should be displayed on client side
      */
     public Optional<URL> getResourceLocator(String adType, AdSize size) {
         Optional<Content> content = urlFormats.stream()
