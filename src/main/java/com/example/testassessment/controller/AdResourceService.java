@@ -1,21 +1,20 @@
 package com.example.testassessment.controller;
 
+import com.example.testassessment.controller.content.Content;
 import com.example.testassessment.util.AdSize;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class AdResourceService {
     private static final Logger log = LoggerFactory.getLogger(AdResourceService.class);
-    private static final Map<String, String> urlFormats = new HashMap<String, String>() {{
-        put("image", "http://cdn101.example.com/img/%dx%d.png");
-        put("animation", "http://cdn202.example.com/img/%dx%d.gif");
-        put("video", "http://cdn303.example.com/video/codec/mp4/%d-%d.mp4");
+    private static final Set<Content> urlFormats = new HashSet<Content>() {{
+        add(new Content("image", "http://cdn101.example.com/img/%dx%d.png"));
+        add(new Content("animation", "http://cdn202.example.com/img/%dx%d.gif"));
+        add(new Content("video", "http://cdn303.example.com/video/codec/mp4/%d-%d.mp4"));
     }};
 
     /**

@@ -12,5 +12,4 @@ public class AdRequest {
     public AdSize getSize() {
         return new AdSize(h, w);
     }
-
 }
