@@ -34,7 +34,7 @@ public class AdControllerTest {
         AdProcessor adProcessor = new AdProcessor();
         adProcessor.setResourceService(new AdResourceService());
         adProcessor.setAdPlaceRepository(id -> AD_PLACE_ID.equals(id) ? Optional.of(adPlace) : Optional.empty());
-        adProcessor.setAppRepository(id -> APP_ID.equals(id) ? Optional.of(app) : Optional.empty());
+        adProcessor.setAppRepository(id -> app.getId().equals(id) ? Optional.of(app) : Optional.empty());
 
         adController = new AdController();
         adController.setAdProcessor(adProcessor);
@@ -42,22 +42,22 @@ public class AdControllerTest {
 
     @Test
     public void legacyTest() {
-        String jsonRequest = "{\"adPlaceId\":\"" + AD_PLACE_ID + "\",\"h\":150,\"w\":150}";
-        String response = adController.serveAd(jsonRequest);
+        String request = "{\"adPlaceId\":\"" + AD_PLACE_ID + "\",\"h\":150,\"w\":150}";
+        String response = adController.serveAd(request);
         assertEquals("{\"url\":\"http://cdn202.example.com/img/150x150.gif\",\"type\":\"animation\"}", response);
     }
 
     @Test
-    public void legacyBadIdRequestTest() {
-        String jsonRequest = "{\"adPlaceId\":\"" + 1 + "\",\"h\":150,\"w\":150}";
-        String response = adController.serveAd(jsonRequest);
+    public void badIdRequestTest() {
+        String request = "{\"adPlaceId\":\"" + 1 + "\",\"h\":150,\"w\":150}";
+        String response = adController.serveAd(request);
         assertEquals("{}", response);
     }
 
     @Test
-    public void legacyBadSizeRequestTest() {
-        String jsonRequest = "{\"adPlaceId\":\"" + AD_PLACE_ID + "\",\"h\":150,\"w\":99}";
-        String response = adController.serveAd(jsonRequest);
+    public void badSizeRequestTest() {
+        String request = "{\"adPlaceId\":\"" + AD_PLACE_ID + "\",\"h\":150,\"w\":99}";
+        String response = adController.serveAd(request);
         assertEquals("{}", response);
     }
 

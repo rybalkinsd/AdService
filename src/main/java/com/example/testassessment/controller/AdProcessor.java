@@ -27,14 +27,14 @@ public class AdProcessor {
     public AdResponse process(final AdRequest request) {
         Optional<AdPlace> oAdPlace = adPlaceRepository.findById(request.getAdPlaceId());
         if (!oAdPlace.isPresent()) {
-            log.info("No {} in adPlaceRepository.", request.getAdPlaceId());
+            log.info("Not found: {} in adPlaceRepository.", request.getAdPlaceId());
             return AdResponse.EmptyAdResponse;
         }
 
         AdPlace adPlace = oAdPlace.get();
         Optional<App> oApp = appRepository.findById(adPlace.getAppId());
         if (!oApp.isPresent()) {
-            log.info("No {} in appRepository.", adPlace.getAppId());
+            log.info("Not found: {} in appRepository.", adPlace.getAppId());
             return AdResponse.EmptyAdResponse;
         }
 

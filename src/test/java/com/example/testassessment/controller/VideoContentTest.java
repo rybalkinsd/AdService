@@ -33,7 +33,7 @@ public class VideoContentTest {
         AdProcessor adProcessor = new AdProcessor();
         adProcessor.setResourceService(new AdResourceService());
         adProcessor.setAdPlaceRepository(id -> AD_PLACE_ID.equals(id) ? Optional.of(adPlace) : Optional.empty());
-        adProcessor.setAppRepository(id -> APP_ID.equals(id) ? Optional.of(app) : Optional.empty());
+        adProcessor.setAppRepository(id -> app.getId().equals(id) ? Optional.of(app) : Optional.empty());
 
         adController = new AdController();
         adController.setAdProcessor(adProcessor);
@@ -41,44 +41,44 @@ public class VideoContentTest {
 
     @Test
     public void videoTest() {
-        String jsonRequest = "{\"adPlaceId\":\"" + AD_PLACE_ID + "\",\"h\":280,\"w\":325}";
-        String response = adController.serveAd(jsonRequest);
+        String request = "{\"adPlaceId\":\"" + AD_PLACE_ID + "\",\"h\":280,\"w\":325}";
+        String response = adController.serveAd(request);
         assertEquals("{\"url\":\"http://cdn303.example.com/video/codec/mp4/240-320.mp4\",\"type\":\"video\"}", response);
     }
 
     @Test
     public void videoTestSmall() {
-        String jsonRequest = "{\"adPlaceId\":\"" + AD_PLACE_ID + "\",\"h\":250,\"w\":300}";
-        String response = adController.serveAd(jsonRequest);
+        String request = "{\"adPlaceId\":\"" + AD_PLACE_ID + "\",\"h\":250,\"w\":300}";
+        String response = adController.serveAd(request);
         assertEquals("{}", response);
     }
 
     @Test
     public void videoTestBig() {
-        String jsonRequest = "{\"adPlaceId\":\"" + AD_PLACE_ID + "\",\"h\":2500,\"w\":3000}";
-        String response = adController.serveAd(jsonRequest);
+        String request = "{\"adPlaceId\":\"" + AD_PLACE_ID + "\",\"h\":2500,\"w\":3000}";
+        String response = adController.serveAd(request);
         assertEquals("{\"url\":\"http://cdn303.example.com/video/codec/mp4/900-1440.mp4\",\"type\":\"video\"}", response);
     }
 
     @Test
     public void videoTestIrregular() {
-        String jsonRequest = "{\"adPlaceId\":\"" + AD_PLACE_ID + "\",\"h\":2500,\"w\":10}";
-        String response = adController.serveAd(jsonRequest);
+        String request = "{\"adPlaceId\":\"" + AD_PLACE_ID + "\",\"h\":2500,\"w\":10}";
+        String response = adController.serveAd(request);
         assertEquals("{}", response);
     }
 
     @Test
     public void videoTesDynamic() {
-        String jsonRequest = "{\"adPlaceId\":\"" + AD_PLACE_ID + "\",\"h\":250,\"w\":300}";
-        String response = adController.serveAd(jsonRequest);
+        String request = "{\"adPlaceId\":\"" + AD_PLACE_ID + "\",\"h\":250,\"w\":300}";
+        String response = adController.serveAd(request);
         assertEquals("{}", response);
 
         Contents.VIDEO.addGeneratedSize(new AdSize(40, 40));
-        response = adController.serveAd(jsonRequest);
+        response = adController.serveAd(request);
         assertEquals("{\"url\":\"http://cdn303.example.com/video/codec/mp4/40-40.mp4\",\"type\":\"video\"}", response);
 
         Contents.VIDEO.removeGeneratedSize(new AdSize(40, 40));
-        response = adController.serveAd(jsonRequest);
+        response = adController.serveAd(request);
         assertEquals("{}", response);
     }
 }

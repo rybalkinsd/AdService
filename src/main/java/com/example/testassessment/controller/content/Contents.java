@@ -14,4 +14,6 @@ public class Contents {
         VIDEO.addGeneratedSize(new AdSize(900, 1440));
     }
 
+    private Contents() { }
+
 }

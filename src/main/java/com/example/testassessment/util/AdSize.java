@@ -6,6 +6,9 @@ import java.util.Comparator;
 
 
 public class AdSize {
+    public static final Comparator<AdSize> BY_SIZE_COMPARATOR = (o1, o2) -> o1.getSize() - o2.getSize();
+    public static final AdSize ZERO_SIZE_AD = new AdSize(0, 0);
+
     @Getter
     private final int height;
     @Getter
@@ -15,14 +18,6 @@ public class AdSize {
         this.height = height;
         this.width = width;
     }
-
-    public static final Comparator<AdSize> BY_SIZE_COMPARATOR = (o1, o2) -> o1.getSize() - o2.getSize();
-    public static final AdSize ZERO_SIZE_AD = new AdSize(0, 0);
-
-    private int getSize() {
-        return height * width;
-    }
-
 
     public boolean isLessThan(AdSize size) {
         return height < size.height || width < size.width;
@@ -46,5 +41,9 @@ public class AdSize {
         int result = height;
         result = 31 * result + width;
         return result;
+    }
+
+    private int getSize() {
+        return height * width;
     }
 }
