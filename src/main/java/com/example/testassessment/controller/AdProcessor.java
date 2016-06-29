@@ -5,7 +5,6 @@ import com.example.testassessment.repository.AdPlaceRepository;
 import com.example.testassessment.repository.App;
 import com.example.testassessment.repository.AppRepository;
 import com.example.testassessment.util.AdSize;
-import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
