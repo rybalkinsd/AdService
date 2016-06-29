@@ -1,0 +1,62 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+   xsi:schemaLocation="
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--<context:annotation-config/>-->
+    <context:component-scan base-package="com.example.testassessment"/>
+
+    <bean id="adResourceService" class="com.example.testassessment.controller.AdResourceService">
+        <property name="contents">
+            <list>
+                <ref bean="imageContent"/>
+                <ref bean="animationContent"/>
+                <ref bean="videoContent"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="imageContent" class="com.example.testassessment.controller.content.Content">
+        <constructor-arg name="type" value="image"/>
+        <constructor-arg name="urlFormat" value="http://cdn101.example.com/img/%dx%d.png"/>
+    </bean>
+
+    <bean id="animationContent" class="com.example.testassessment.controller.content.Content">
+        <constructor-arg name="type" value="animation"/>
+        <constructor-arg name="urlFormat" value="http://cdn202.example.com/img/%dx%d.gif"/>
+    </bean>
+
+    <bean id="videoContent" class="com.example.testassessment.controller.content.VideoContent">
+        <constructor-arg name="type" value="video"/>
+        <constructor-arg name="urlFormat" value="http://cdn303.example.com/video/codec/mp4/%d-%d.mp4"/>
+        <constructor-arg name="generatedSizes">
+            <list>
+                <ref bean="sizeS"/>
+                <ref bean="sizeM"/>
+                <ref bean="sizeL"/>
+                <ref bean="sizeXL"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="sizeS" class="com.example.testassessment.util.AdSize">
+        <constructor-arg name="width" value="320"/>
+        <constructor-arg name="height" value="240"/>
+    </bean>
+    <bean id="sizeM" class="com.example.testassessment.util.AdSize">
+        <constructor-arg name="width" value="640"/>
+        <constructor-arg name="height" value="480"/>
+    </bean>
+    <bean id="sizeL" class="com.example.testassessment.util.AdSize">
+        <constructor-arg name="width" value="1280"/>
+        <constructor-arg name="height" value="720"/>
+    </bean>
+    <bean id="sizeXL" class="com.example.testassessment.util.AdSize">
+        <constructor-arg name="width" value="1440"/>
+        <constructor-arg name="height" value="900"/>
+    </bean>
+
+</beans>

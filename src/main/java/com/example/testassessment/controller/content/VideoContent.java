@@ -1,6 +1,7 @@
 package com.example.testassessment.controller.content;
 
 import com.example.testassessment.util.AdSize;
+import lombok.Setter;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -14,10 +15,12 @@ public class VideoContent extends Content {
     private final ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
     private final Lock readLock = readWriteLock.readLock();
     private final Lock writeLock = readWriteLock.writeLock();
+
     private List<AdSize> generatedSizes = new ArrayList<>();
 
-    public VideoContent(String type, String urlFormat) {
+    public VideoContent(String type, String urlFormat, List<AdSize> generatedSizes) {
         super(type, urlFormat);
+        this.generatedSizes = generatedSizes;
     }
 
     @Override

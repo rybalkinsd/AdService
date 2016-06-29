@@ -8,19 +8,21 @@ import com.example.testassessment.util.AdSize;
 import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.net.URL;
 import java.util.Optional;
 
-
+@Component
 public class AdProcessor {
     private static final Logger log = LoggerFactory.getLogger(AdProcessor.class);
 
-    @Setter
+    @Autowired
     private AdPlaceRepository adPlaceRepository;
-    @Setter
+    @Autowired
     private AppRepository appRepository;
-    @Setter
+    @Autowired
     private AdResourceService resourceService;
 
 

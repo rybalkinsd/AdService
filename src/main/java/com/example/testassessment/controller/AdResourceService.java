@@ -1,14 +1,15 @@
 package com.example.testassessment.controller;
 
 import com.example.testassessment.controller.content.Content;
-import com.example.testassessment.controller.content.Contents;
 import com.example.testassessment.util.AdSize;
+import lombok.Setter;
 
 import java.net.URL;
 import java.util.*;
 
 public class AdResourceService {
-    private static final List<Content> urlFormats = Arrays.asList(Contents.IMAGE, Contents.ANIMATION, Contents.VIDEO);
+    @Setter
+    private List<Content> contents = Collections.emptyList();
 
     /**
      * Generates advertisement content "on-the-fly". Generated content will fit perfect into ad space size.
@@ -18,7 +19,7 @@ public class AdResourceService {
      * @return Optional<URL> of file which should be displayed on client side
      */
     public Optional<URL> getResourceLocator(String adType, AdSize size) {
-        Optional<Content> content = urlFormats.stream()
+        Optional<Content> content = contents.stream()
                 .filter(c -> c.getType().equals(adType))
                 .findFirst();
 

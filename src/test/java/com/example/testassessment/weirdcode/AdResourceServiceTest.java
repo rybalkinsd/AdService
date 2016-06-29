@@ -3,10 +3,19 @@ package com.example.testassessment.weirdcode;
 import com.example.testassessment.controller.AdResourceService;
 import com.example.testassessment.util.AdSize;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class AdResourceServiceTest {
-    private AdResourceService adResourceService = new AdResourceService();
+    private AdResourceService adResourceService;
+
+    @Before
+    public void setUp() throws Exception {
+        ApplicationContext context = new ClassPathXmlApplicationContext("/application-context.xml");
+        adResourceService = (AdResourceService) context.getBean("adResourceService");
+    }
 
     @Test
     public void test() throws Exception {
