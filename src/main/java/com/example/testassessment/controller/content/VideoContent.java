@@ -1,7 +1,6 @@
 package com.example.testassessment.controller.content;
 
 import com.example.testassessment.util.AdSize;
-import lombok.Setter;
 
 import java.net.URL;
 import java.util.ArrayList;

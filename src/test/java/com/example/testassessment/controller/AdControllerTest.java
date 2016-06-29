@@ -1,15 +1,10 @@
 package com.example.testassessment.controller;
 
-import com.example.testassessment.repository.AdPlace;
-import com.example.testassessment.repository.App;
 import com.example.testassessment.repository.mock.MockConstants;
-import com.example.testassessment.util.AdSize;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 
